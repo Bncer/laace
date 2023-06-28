@@ -5,10 +5,12 @@ class Settings(BaseSettings):
     database_port: str
     database_password: str
     database_name: str
+    database_username: str
     secret_key: str
 
 
     class Config:
-        env_file: ".env"
+        env_file = ".env"
+        env_file_encoding = 'utf-8'
 
 settings = Settings()

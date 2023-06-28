@@ -6,7 +6,7 @@ from .database import Base
 class Crime(Base):
     __tablename__ = "crimes"
 
-    dr_no = Column(String, nullable=False)
+    dr_no = Column(String, primary_key=True, nullable=False)
     date_rptd = Column(TIMESTAMP,
                         nullable=False)
     date_occ = Column(TIMESTAMP,
