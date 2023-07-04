@@ -6,7 +6,7 @@ class Settings(BaseSettings):
     database_password: str
     database_name: str
     database_username: str
-    la_api_token: str
+    api_token: str
 
 
     class Config:
