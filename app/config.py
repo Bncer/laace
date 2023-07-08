@@ -7,6 +7,7 @@ class Settings(BaseSettings):
     database_name: str
     database_username: str
     api_token: str
+    api_host: str
 
 
     class Config:

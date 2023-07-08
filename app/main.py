@@ -4,7 +4,7 @@ from apscheduler.schedulers.background import BackgroundScheduler
 
 from . import models
 from .database import engine, SessionLocal 
-from .simulate_dt import add_data
+from .date_simulation import load_data
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -23,7 +23,12 @@ app.add_middleware(
 @app.on_event('startup')
 def init_data():
     scheduler = BackgroundScheduler()
-    scheduler.add_job(add_data, 'cron', args=[models, SessionLocal], hour= 23, minute=58)
+    scheduler.add_job(
+        load_data, 'cron', 
+        args=[models], 
+        hour= 1, 
+        minute=24
+    )
     scheduler.start()
 
 
