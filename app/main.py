@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from apscheduler.schedulers.background import BackgroundScheduler
 
 from . import models
-from .database import engine, SessionLocal 
+from .database import engine 
 from .date_simulation import load_data
 
 models.Base.metadata.create_all(bind=engine)
@@ -26,8 +26,8 @@ def init_data():
     scheduler.add_job(
         load_data, 'cron', 
         args=[models], 
-        hour= 1, 
-        minute=24
+        hour= 23, 
+        minute=30
     )
     scheduler.start()
 
