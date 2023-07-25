@@ -2,9 +2,10 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from apscheduler.schedulers.background import BackgroundScheduler
 
-from . import models
-from .database import engine 
-from .date_simulation import load_data
+from app.config import settings
+from app import models
+from app.database import engine 
+from app.date_simulation import DateSimulation
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -23,11 +24,12 @@ app.add_middleware(
 @app.on_event('startup')
 def init_data():
     scheduler = BackgroundScheduler()
+    ds = DateSimulation(settings, models)    
     scheduler.add_job(
-        load_data, 'cron', 
+        ds.load_data(), 'cron', 
         args=[models], 
-        hour= 23, 
-        minute=30
+        hour= 0, 
+        minute=32
     )
     scheduler.start()
 

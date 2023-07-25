@@ -4,11 +4,11 @@ import json
 
 from sqlalchemy import func
 
-from config import settings
-from schemas import CrimeBase
-# from . 
-import models
-from database import SessionLocal 
+from app.config import settings
+from app.schemas import CrimeBase
+from app.database import SessionLocal
+from app import models
+ 
 
 class DateSimulation:
     """
@@ -23,14 +23,18 @@ class DateSimulation:
         self.db = SessionLocal()
         self.settings = settings
         self.models = models
+        self.curr_day_diff = self.get_current_day_diff()
+
+    def get_current_day_diff(self):
+        curr_day_diff = self.db.query(self.models.Time.days).first()
+        return curr_day_diff
 
 
     def get_soure_data(self):
-        curr_day_diff = self.db.query(self.models.Time.days).first()
         start_date = self.db.query(func.max(self.models.Crime.date_rptd)).first()[0]
         start_date += timedelta(days=1)
         next_day_diff = (datetime.now().date() - start_date.date()).days
-        return curr_day_diff, start_date, next_day_diff
+        return start_date, next_day_diff
 
 
     def insert_new_day_diff(self, day_diff):
@@ -85,25 +89,24 @@ class DateSimulation:
 
     def load_data(self):
 
-        curr_day_diff, start_date, next_day_diff = self.get_soure_data()
+        start_date, next_day_diff = self.get_soure_data()
 
-        if not curr_day_diff:
+        if not self.curr_day_diff:
             self.insert_new_day_diff(next_day_diff)
 
-        elif (next_day_diff - curr_day_diff[0]) >= 1:
+        elif (next_day_diff - self.curr_day_diff[0]) >= 1:
             end_date, day_offset = self.fastforward_days(
                                         next_day_diff, 
                                         start_date, 
-                                        curr_day_diff[0]
+                                        self.curr_day_diff[0]
                                     )
             for date in self.daterange(start_date, end_date):
                 response = self.request_data(date)
                 self.validate_and_insert_data(response)
 
-            self.update_day_diff(curr_day_diff[0], day_offset)
+            self.update_day_diff(self.curr_day_diff[0], day_offset)
 
 
 if __name__=='__main__':
     ds = DateSimulation(settings, models)
     ds.load_data()
-    # print(ds.get_soure_data())
