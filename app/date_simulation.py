@@ -46,7 +46,7 @@ class DateSimulation:
 
     def fastforward_days(self, next_val, start_dt, curr_val):
         day_offset = next_val - curr_val
-        day_offset *= 3
+        day_offset *= self.settings.fast_forward_number
         end_dt = start_dt + timedelta(days=day_offset)
         return end_dt, day_offset
 
