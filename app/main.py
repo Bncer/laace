@@ -26,10 +26,10 @@ def init_data():
     scheduler = BackgroundScheduler()
     ds = DateSimulation(settings, models)    
     scheduler.add_job(
-        ds.load_data(), 'cron', 
-        args=[models], 
-        hour= 0, 
-        minute=32
+        ds.load_data, 'cron', 
+        args=[],
+        hour= 1, 
+        minute=34
     )
     scheduler.start()
 
