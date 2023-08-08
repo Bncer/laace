@@ -8,7 +8,7 @@ class Settings(BaseSettings):
     database_username: str
     api_token: str
     api_host: str
-
+    fast_forward_number: int
 
     class Config:
         env_file = ".env"

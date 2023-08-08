@@ -17,9 +17,6 @@ class DateSimulation:
     """
 
     def __init__(self, settings, models):
-        """
-        :param models: Address of local or remote tracking server.
-        """
         self.db = SessionLocal()
         self.settings = settings
         self.models = models
@@ -43,13 +40,13 @@ class DateSimulation:
 
 
     def daterange(self, start_date, end_date):
-        for n in range(1, int((end_date - start_date).days)+1):
+        for n in range(int((end_date - start_date).days)):
             yield start_date + timedelta(n)
 
 
     def fastforward_days(self, next_val, start_dt, curr_val):
         day_offset = next_val - curr_val
-        day_offset *= 3
+        day_offset *= self.settings.fast_forward_number
         end_dt = start_dt + timedelta(days=day_offset)
         return end_dt, day_offset
 
@@ -76,7 +73,6 @@ class DateSimulation:
             new_crime = models.Crime(**crime_val.dict())
             self.db.add(new_crime)
             self.db.commit()
-            print(crime_val.date_rptd, crime_val.crm_cd_desc)
 
 
     def update_day_diff(self, curr, offset):
