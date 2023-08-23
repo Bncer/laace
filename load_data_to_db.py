@@ -1,9 +1,8 @@
-import sys, os
+import os
+import sys
 import warnings
 
 import pandas as pd
-import numpy as np
-import sqlalchemy
 
 from app.database import engine
 

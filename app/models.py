@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, Float, String, CheckConstraint
+from sqlalchemy import CheckConstraint, Column, Float, Integer, String
 from sqlalchemy.sql.sqltypes import TIMESTAMP
 
 from .database import Base

@@ -1,13 +1,13 @@
-import requests
-from datetime import datetime, timedelta
 import json
+from datetime import datetime, timedelta
 
+import requests
 from sqlalchemy import func
 
-from app.config import settings
-from app.schemas import CrimeBase
-from app.database import SessionLocal
 from app import models
+from app.config import settings
+from app.database import SessionLocal
+from app.schemas import CrimeBase
 
 
 class DateSimulation:

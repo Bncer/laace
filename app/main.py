@@ -1,9 +1,9 @@
+from apscheduler.schedulers.background import BackgroundScheduler
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from apscheduler.schedulers.background import BackgroundScheduler
 
-from app.config import settings
 from app import models
+from app.config import settings
 from app.database import engine
 from app.date_simulation import DateSimulation
 
