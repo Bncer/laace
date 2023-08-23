@@ -1,0 +1,45 @@
+[tool.black]
+line-length = 100
+target-version = ['py38']
+
+[tool.ruff]
+line-length = 100
+target-version = "py38"
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+select = [
+  "E",
+  "F",
+  "C4",
+  "I",
+  "PLR0402",
+  "PT001",
+  "PT002",
+  "PT003",
+  "PT006",
+  "PT007",
+  "PT009",
+  "PT010",
+  "PT011",
+  "PT012",
+  "PT013",
+  "PT014",
+  "PT018",
+  "PT022",
+  "PT023",
+  "PT026",
+  "PT027",
+  "RUF010",
+  "UP004",
+  "UP008",
+  "UP011",
+  "UP012",
+  "UP015",
+  "UP030",
+  "UP031",
+  "UP032",
+  "UP034",
+  "SIM101",
+  "T20",
+  "TID252",
+]
+force-exclude = true

@@ -3,6 +3,7 @@ from sqlalchemy.sql.sqltypes import TIMESTAMP
 
 from .database import Base
 
+
 class Crime(Base):
     __tablename__ = "crimes"
 
@@ -35,9 +36,9 @@ class Crime(Base):
     lat = Column(Float, nullable=True)
     lon = Column(Float, nullable=True)
 
+
 class Time(Base):
-    __tablename__ = 'time'
+    __tablename__ = "time"
     id = Column(Integer, primary_key=True, nullable=False)
     days = Column(Integer, nullable=False)
-    CheckConstraint('"id" = 1',
-                    name='check_time_diff')
+    CheckConstraint('"id" = 1', name="check_time_diff")
