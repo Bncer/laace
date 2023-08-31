@@ -1,3 +1,5 @@
-from app import database
-from app import config
-from app import date_simulation
+from app import (
+    database,
+    config,
+    date_simulation
+)
