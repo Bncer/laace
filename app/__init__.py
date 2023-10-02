@@ -1,5 +1,5 @@
 from app import (
-    database,
     config,
-    date_simulation
+    database,
+    date_simulation,
 )

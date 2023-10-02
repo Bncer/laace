@@ -43,3 +43,6 @@ select = [
   "TID252",
 ]
 force-exclude = true
+
+[tool.ruff.per-file-ignores]
+"__init__.py" = ["E402", "F401"]
