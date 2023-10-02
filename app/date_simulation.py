@@ -48,7 +48,6 @@ class DateSimulation:
 
     def request_data(self, curr_date):
         curr_date = curr_date.strftime("%Y-%m-%dT%H:%M:%S")
-        print(curr_date)
 
         url = "{}?date_rptd='{}'&$$app_token={}".format(
             self.settings.api_host, curr_date, self.settings.api_token
